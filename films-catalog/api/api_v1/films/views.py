@@ -3,6 +3,7 @@ import random
 
 from fastapi import Depends, APIRouter, status, Form
 
+from .crud import storage
 from .dependencies import prefetch_film_by_id
 from schemas.film import Film, FilmCreate
 
@@ -15,7 +16,7 @@ router = APIRouter(prefix="/films", tags=["Films"])
     response_model=list[Film],
 )
 def read_film_list():
-    return
+    return storage.get()
 
 
 @router.post(
@@ -31,7 +32,7 @@ def add_film(slug: str, create_film: FilmCreate):
 
 
 @router.get(
-    "/film/{movie_id}",
+    "/film/{slug}",
     response_model=Film,
 )
 def get_film_by_id(
