@@ -2,17 +2,17 @@ from schemas.film import Film
 
 FILMS = [
     Film(
-        movie_id=1,
+        slug="abc",
         name="Остров проклятых",
         description="Фильм про психбольницу",
     ),
     Film(
-        movie_id=2,
+        slug="foo",
         name="Джентельмены",
         description="Фильм про мафию",
     ),
     Film(
-        movie_id=3,
+        slug="bar",
         name="Область тьмы",
         description="Фильм про работу мозга",
     ),
