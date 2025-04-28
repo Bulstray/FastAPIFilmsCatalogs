@@ -23,9 +23,9 @@ def read_film_list():
     response_model=Film,
     status_code=status.HTTP_201_CREATED,
 )
-def add_film(create_film: FilmCreate):
+def add_film(slug: str, create_film: FilmCreate):
     return Film(
-        movie_id=random.randint(0, 100),
+        slug=slug,
         **create_film.model_dump(),
     )
 
