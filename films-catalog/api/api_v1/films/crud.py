@@ -35,6 +35,12 @@ class FilmsStorage(BaseModel):
         self.slug_to_film[film.slug] = film
         return film
 
+    def delete_by_slag(self, slug) -> None:
+        self.slug_to_film.pop(slug, None)
+
+    def delete(self, movie: Film) -> None:
+        self.delete_by_slag(slug=movie.slug)
+
 
 storage = FilmsStorage()
 
