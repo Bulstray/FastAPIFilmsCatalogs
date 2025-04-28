@@ -42,3 +42,24 @@ def get_film_by_id(
     ],
 ):
     return film
+
+
+@router.delete(
+    "/slug/",
+    status_code=status.HTTP_204_NO_CONTENT,
+    responses={
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Film not found",
+            "content": {
+                "application/json": {"detail": "Film 'slug' not found"},
+            },
+        },
+    },
+)
+def delete_movie(
+    movie: Annotated[
+        Film,
+        Depends(prefetch_film_by_id),
+    ],
+):
+    storage.delete(movie=movie)
