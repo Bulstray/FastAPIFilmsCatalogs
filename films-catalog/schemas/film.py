@@ -5,7 +5,7 @@ class FilmBase(BaseModel):
     slug: str
 
 
-class FilmCreate(BaseModel):
+class FilmCreate(FilmBase):
     name: str
     description: str
 
