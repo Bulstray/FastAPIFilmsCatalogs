@@ -4,29 +4,29 @@ from fastapi import Depends, APIRouter, status
 
 from api.api_v1.films.crud import storage
 from api.api_v1.films.dependencies import prefetch_film_by_id
-from schemas.film import Film, FilmUpdate, FilmPartialUpdate
+from schemas.movie import Movie, MovieUpdate, MoviePartialUpdate, MovieRead
 
 router = APIRouter()
 
 
-MovieBySlug = Annotated[Film, Depends(prefetch_film_by_id)]
+MovieBySlug = Annotated[Movie, Depends(prefetch_film_by_id)]
 
 
 @router.get(
     "/film/{slug}",
-    response_model=Film,
+    response_model=MovieRead,
 )
-def get_film_by_id(film: MovieBySlug):
-    return film
+def get_film_by_id(movie: MovieBySlug) -> Movie:
+    return movie
 
 
 @router.put(
     "/{slug}/",
-    response_model=Film,
+    response_model=MovieRead,
 )
 def update_film_details(
     movie: MovieBySlug,
-    movie_in: FilmUpdate,
+    movie_in: MovieUpdate,
 ):
     return storage.update(
         movie=movie,
@@ -36,11 +36,11 @@ def update_film_details(
 
 @router.patch(
     "/{slug}/",
-    response_model=Film,
+    response_model=MovieRead,
 )
 def update_partial_details(
     movie: MovieBySlug,
-    movie_in: FilmPartialUpdate,
+    movie_in: MoviePartialUpdate,
 ):
     return storage.update_partial(
         movie,
