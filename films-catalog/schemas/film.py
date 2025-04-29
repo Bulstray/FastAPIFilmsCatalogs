@@ -5,11 +5,17 @@ class FilmBase(BaseModel):
     slug: str
 
 
+class Film(FilmBase):
+    name: str
+    description: str
+
+
 class FilmCreate(FilmBase):
     name: str
     description: str
 
 
-class Film(FilmBase):
+class FilmUpdate(FilmBase):
+    slug: str
     name: str
     description: str
