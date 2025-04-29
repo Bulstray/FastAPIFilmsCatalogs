@@ -19,3 +19,9 @@ class FilmUpdate(FilmBase):
     slug: str
     name: str
     description: str
+
+
+class FilmPartialUpdate(FilmBase):
+    slug: str
+    name: str
+    description: str
