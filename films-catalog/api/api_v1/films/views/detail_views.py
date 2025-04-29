@@ -4,8 +4,7 @@ from fastapi import Depends, APIRouter, status
 
 from api.api_v1.films.crud import storage
 from api.api_v1.films.dependencies import prefetch_film_by_id
-from schemas.film import Film, FilmUpdate
-
+from schemas.film import Film, FilmUpdate, FilmPartialUpdate
 
 router = APIRouter()
 
@@ -35,14 +34,25 @@ def update_film_details(
     )
 
 
+@router.patch(
+    "/{slug}/",
+    response_model=Film,
+)
+def update_partial_details(
+    movie: MovieBySlug,
+    movie_in: FilmPartialUpdate,
+):
+    return storage.update_partial(
+        movie,
+        movie_in,
+    )
+
+
 @router.delete(
     "/slug/",
     status_code=status.HTTP_204_NO_CONTENT,
 )
 def delete_movie(
-    movie: Annotated[
-        Film,
-        Depends(prefetch_film_by_id),
-    ],
+    movie: MovieBySlug,
 ):
     storage.delete(movie=movie)
