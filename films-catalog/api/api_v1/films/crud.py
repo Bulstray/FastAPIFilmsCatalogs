@@ -1,8 +1,6 @@
-import json
-from typing import Any, Self
+import logging
 
 from pydantic import BaseModel, ValidationError
-from typing_extensions import overload
 
 from core.config import MOVIE_STORAGE_FILEPATH
 from schemas.movie import (
@@ -13,12 +11,15 @@ from schemas.movie import (
     MovieRead,
 )
 
+log = logging.getLogger(__name__)
+
 
 class FilmsStorage(BaseModel):
     slug_to_film: dict[str, Movie] = {}
 
     def save_state(self) -> None:
         MOVIE_STORAGE_FILEPATH.write_text(self.model_dump_json(indent=2))
+        log.info("Saved movie to storage file.")
 
     @classmethod
     def from_state(cls):
@@ -36,6 +37,7 @@ class FilmsStorage(BaseModel):
         film = Movie(**film.model_dump())
         self.slug_to_film[film.slug] = film
         self.save_state()
+        log.info("Create new movie.")
         return film
 
     def delete_by_slag(self, slug) -> None:
@@ -69,6 +71,8 @@ class FilmsStorage(BaseModel):
 
 try:
     storage = FilmsStorage.from_state()
+    log.warning("Recovered data from storage file")
 except ValidationError:
     storage = FilmsStorage()
     storage.save_state()
+    log.warning("Rewritten storage file due to validation error.")
