@@ -73,5 +73,4 @@ class FilmsStorage(BaseModel):
             setattr(movie, field_name, value)
 
 
-
 storage = FilmsStorage()
