@@ -1,12 +1,21 @@
 import logging
 
-from fastapi import HTTPException, BackgroundTasks
+from fastapi import HTTPException, BackgroundTasks, Request
 from starlette import status
 
 from .crud import storage
 from schemas.movie import Movie
 
 log = logging.getLogger(__name__)
+
+UNSAFE_METHODS = frozenset(
+    {
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "POST",
+    },
+)
 
 
 def prefetch_film_by_id(slug) -> Movie:
@@ -21,7 +30,11 @@ def prefetch_film_by_id(slug) -> Movie:
     )
 
 
-def save_storage_state(background_tasks: BackgroundTasks):
+def save_storage_state(
+    request: Request,
+    background_tasks: BackgroundTasks,
+):
     yield
-    log.info("Add background task to save storage")
-    background_tasks.add_task(storage.save_state)
+    if request.method in UNSAFE_METHODS:
+        log.info("Add background task to save storage")
+        background_tasks.add_task(storage.save_state)
