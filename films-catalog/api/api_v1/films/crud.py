@@ -1,5 +1,10 @@
-from pydantic import BaseModel
+import json
+from typing import Any, Self
 
+from pydantic import BaseModel, ValidationError
+from typing_extensions import overload
+
+from core.config import MOVIE_STORAGE_FILEPATH
 from schemas.movie import (
     Movie,
     MovieCreate,
@@ -8,27 +13,18 @@ from schemas.movie import (
     MovieRead,
 )
 
-FILMS = [
-    MovieCreate(
-        slug="abc",
-        name="Остров проклятых",
-        description="Фильм про психбольницу",
-    ),
-    MovieCreate(
-        slug="foo",
-        name="Джентельмены",
-        description="Фильм про мафию",
-    ),
-    MovieCreate(
-        slug="bar",
-        name="Область тьмы",
-        description="Фильм про работу мозга",
-    ),
-]
-
 
 class FilmsStorage(BaseModel):
     slug_to_film: dict[str, Movie] = {}
+
+    def save_state(self) -> None:
+        MOVIE_STORAGE_FILEPATH.write_text(self.model_dump_json(indent=2))
+
+    @classmethod
+    def from_state(cls):
+        if not MOVIE_STORAGE_FILEPATH.exists():
+            return FilmsStorage()
+        return cls.model_validate_json(MOVIE_STORAGE_FILEPATH.read_text())
 
     def get(self) -> list[MovieRead]:
         return [self.slug_to_film[film] for film in self.slug_to_film]
@@ -39,10 +35,12 @@ class FilmsStorage(BaseModel):
     def create(self, film: MovieCreate) -> Movie:
         film = Movie(**film.model_dump())
         self.slug_to_film[film.slug] = film
+        self.save_state()
         return film
 
     def delete_by_slag(self, slug) -> None:
         self.slug_to_film.pop(slug, None)
+        self.save_state()
 
     def delete(self, movie: Movie) -> None:
         self.delete_by_slag(slug=movie.slug)
@@ -54,6 +52,7 @@ class FilmsStorage(BaseModel):
     ) -> Movie:
         for field_name, value in movie_in:
             setattr(movie, field_name, value)
+        self.save_state()
 
         return movie
 
@@ -65,9 +64,11 @@ class FilmsStorage(BaseModel):
         for field_name, value in movie_in.model_dump(exclude_unset=True).items():
             setattr(movie, field_name, value)
 
+        self.save_state()
 
-storage = FilmsStorage()
 
-
-for film in FILMS:
-    storage.create(film=film)
+try:
+    storage = FilmsStorage.from_state()
+except ValidationError:
+    storage = FilmsStorage()
+    storage.save_state()
