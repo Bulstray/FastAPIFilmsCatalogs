@@ -24,5 +24,4 @@ def add_film(
     create_film: MovieCreate,
     background_tasks: BackgroundTasks,
 ):
-    background_tasks.add_task(storage.save_state)
     return storage.create(film=create_film)
