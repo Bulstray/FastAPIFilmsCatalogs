@@ -45,13 +45,11 @@ class FilmsStorage(BaseModel):
     def create(self, film: MovieCreate) -> Movie:
         film = Movie(**film.model_dump())
         self.slug_to_film[film.slug] = film
-        self.save_state()
         log.info("Create new movie.")
         return film
 
     def delete_by_slag(self, slug) -> None:
         self.slug_to_film.pop(slug, None)
-        self.save_state()
 
     def delete(self, movie: Movie) -> None:
         self.delete_by_slag(slug=movie.slug)
@@ -63,7 +61,6 @@ class FilmsStorage(BaseModel):
     ) -> Movie:
         for field_name, value in movie_in:
             setattr(movie, field_name, value)
-        self.save_state()
 
         return movie
 
@@ -75,7 +72,6 @@ class FilmsStorage(BaseModel):
         for field_name, value in movie_in.model_dump(exclude_unset=True).items():
             setattr(movie, field_name, value)
 
-        self.save_state()
 
 
 storage = FilmsStorage()
