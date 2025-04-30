@@ -26,6 +26,8 @@ class MovieCreate(MovieBase):
     Модель для добавления в базу данных фильм
     """
 
+    notes: str = ""
+
 
 class MovieUpdate(MovieBase):
     """
