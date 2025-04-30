@@ -29,7 +29,6 @@ def update_film_details(
     movie_in: MovieUpdate,
     background_tasks: BackgroundTasks,
 ):
-    background_tasks.add_task(storage.save_state)
     return storage.update(
         movie=movie,
         movie_in=movie_in,
@@ -45,7 +44,6 @@ def update_partial_details(
     movie_in: MoviePartialUpdate,
     background_tasks: BackgroundTasks,
 ):
-    background_tasks.add_task(storage.save_state)
     return storage.update_partial(
         movie,
         movie_in,
@@ -57,5 +55,4 @@ def update_partial_details(
     status_code=status.HTTP_204_NO_CONTENT,
 )
 def delete_movie(movie: MovieBySlug, background_tasks: BackgroundTasks):
-    background_tasks.add_task(storage.save_state)
     storage.delete(movie=movie)
