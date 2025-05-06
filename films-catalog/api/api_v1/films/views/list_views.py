@@ -20,7 +20,6 @@ def read_film_list():
     "/",
     response_model=Movie,
     status_code=status.HTTP_201_CREATED,
-    dependencies=[Depends(user_basic_auth_required)],
 )
 def add_film(
     create_film: MovieCreate,
