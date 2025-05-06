@@ -5,14 +5,14 @@ from fastapi.params import Depends
 
 from .list_views import router as list_router
 from .detail_views import router as detail_router
-from ..dependencies import save_storage_state, api_token_required
+from ..dependencies import save_storage_state, user_basic_auth_required
 
 router = APIRouter(
     prefix="/films",
     tags=["Films"],
     dependencies=[
+        Depends(user_basic_auth_required),
         Depends(save_storage_state),
-        Depends(api_token_required),
     ],
 )
 
