@@ -5,14 +5,18 @@ from fastapi import (
     HTTPException,
     BackgroundTasks,
     Request,
-    Header,
     status,
     Depends,
 )
 
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.security import (
+    HTTPBearer,
+    HTTPAuthorizationCredentials,
+    HTTPBasic,
+    HTTPBasicCredentials,
+)
 
-from core.config import API_TOKENS
+from core.config import API_TOKENS, USERS_DB
 from .crud import storage
 from schemas.movie import Movie
 
@@ -36,7 +40,6 @@ static_api_token = HTTPBearer(
 
 def prefetch_film_by_id(slug) -> Movie:
     film: Movie | None = storage.get_by_slug(slug=slug)
-    print(film)
     if film:
         return film
 
@@ -77,3 +80,33 @@ def api_token_required(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid API tokens",
         )
+
+
+user_basic_auth = HTTPBasic(
+    scheme_name="Basic Auth",
+    description="Basic username + password auth",
+    auto_error=False,
+)
+
+
+def user_basic_auth_required(
+    credentials: Annotated[
+        HTTPBasicCredentials | None,
+        Depends(user_basic_auth),
+    ],
+):
+
+    if (
+        credentials
+        and credentials.username in USERS_DB
+        and USERS_DB[credentials.username] == credentials.password
+    ):
+        return
+
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="User creential required. Invalid username or password",
+        headers={
+            "WWW-Authenticate": "Basic",
+        },
+    )
