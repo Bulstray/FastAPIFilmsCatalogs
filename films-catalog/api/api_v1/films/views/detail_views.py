@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends, APIRouter, status, BackgroundTasks
 
 from api.api_v1.films.crud import storage
-from api.api_v1.films.dependencies import prefetch_film_by_id
+from api.api_v1.films.dependencies import prefetch_film_by_id, api_token_required
 from schemas.movie import Movie, MovieUpdate, MoviePartialUpdate, MovieRead
 
 router = APIRouter()
@@ -16,7 +16,9 @@ MovieBySlug = Annotated[Movie, Depends(prefetch_film_by_id)]
     "/film/{slug}",
     response_model=MovieRead,
 )
-def get_film_by_id(movie: MovieBySlug) -> Movie:
+def get_film_by_id(
+    movie: MovieBySlug,
+) -> Movie:
     return movie
 
 
@@ -54,5 +56,8 @@ def update_partial_details(
     "/slug/",
     status_code=status.HTTP_204_NO_CONTENT,
 )
-def delete_movie(movie: MovieBySlug, background_tasks: BackgroundTasks):
+def delete_movie(
+    movie: MovieBySlug,
+    background_tasks: BackgroundTasks,
+):
     storage.delete(movie=movie)
