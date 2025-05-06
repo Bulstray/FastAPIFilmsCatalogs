@@ -19,7 +19,7 @@ class FilmsStorage(BaseModel):
 
     def init_storage_from_state(self) -> None:
         try:
-            data = FilmsStorage()
+            data = FilmsStorage().from_state()
             log.warning("Recovered data from storage file")
         except ValidationError:
             self.save_state()
