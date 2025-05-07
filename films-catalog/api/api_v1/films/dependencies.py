@@ -16,9 +16,10 @@ from fastapi.security import (
     HTTPBasicCredentials,
 )
 
-from core.config import API_TOKENS, USERS_DB
+from core.config import API_TOKENS, USERS_DB, REDIS_TOKES_SET_NAME
 from .crud import storage
 from schemas.movie import Movie
+from .redis import redis_tokens
 
 log = logging.getLogger(__name__)
 
@@ -117,10 +118,15 @@ def user_basic_auth_required(
 
 
 def validate_api_token(api_token: HTTPAuthorizationCredentials):
-    if api_token.credentials not in API_TOKENS:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid API token"
-        )
+    if redis_tokens.sismember(
+        REDIS_TOKES_SET_NAME,
+        api_token.credentials,
+    ):
+        return
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid API token",
+    )
 
 
 def validate_basic_auth(credentials: HTTPBasicCredentials | None):
