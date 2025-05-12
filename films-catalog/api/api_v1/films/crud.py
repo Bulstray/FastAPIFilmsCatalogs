@@ -19,6 +19,7 @@ redis = Redis(
     host=config.REDIS_HOST,
     port=config.REDIS_PORT,
     db=config.REDIS_DB_MOVIE,
+    decode_responses=True,
 )
 
 
@@ -48,7 +49,15 @@ class FilmsStorage(BaseModel):
         return [self.slug_to_film[film] for film in self.slug_to_film]
 
     def get_by_slug(self, slug):
-        return self.slug_to_film.get(slug)
+        answer = redis.hget(
+            name=config.REDIS_MOVIE_HASH_NAME,
+            key=slug,
+        )
+
+        if answer is None:
+            return None
+
+        return Movie.model_validate_json(answer)
 
     def create(self, film: MovieCreate) -> Movie:
         film = Movie(**film.model_dump())
