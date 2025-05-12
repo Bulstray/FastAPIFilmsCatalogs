@@ -39,6 +39,13 @@ class FilmsStorage(BaseModel):
         MOVIE_STORAGE_FILEPATH.write_text(self.model_dump_json(indent=2))
         log.info("Saved movie to storage file.")
 
+    def save_movie(self, movie: Movie) -> None:
+        redis.hset(
+            name=config.REDIS_MOVIE_HASH_NAME,
+            key=movie.slug,
+            value=movie.model_dump_json(),
+        )
+
     @classmethod
     def from_state(cls):
         if not MOVIE_STORAGE_FILEPATH.exists():
@@ -61,12 +68,7 @@ class FilmsStorage(BaseModel):
 
     def create(self, film: MovieCreate) -> Movie:
         film = Movie(**film.model_dump())
-        redis.hset(
-            name=config.REDIS_MOVIE_HASH_NAME,
-            key=film.slug,
-            value=film.model_dump_json(),
-        )
-        self.slug_to_film[film.slug] = film
+        self.save_movie(movie=film)
         log.info("Create new movie.")
         return film
 
@@ -81,9 +83,11 @@ class FilmsStorage(BaseModel):
         movie: Movie,
         movie_in: MovieUpdate,
     ) -> Movie:
+
         for field_name, value in movie_in:
             setattr(movie, field_name, value)
 
+        self.save_movie(movie=movie)
         return movie
 
     def update_partial(
@@ -93,6 +97,9 @@ class FilmsStorage(BaseModel):
     ):
         for field_name, value in movie_in.model_dump(exclude_unset=True).items():
             setattr(movie, field_name, value)
+
+        self.save_movie(movie=movie)
+        return movie
 
 
 storage = FilmsStorage()
