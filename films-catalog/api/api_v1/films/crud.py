@@ -45,19 +45,19 @@ class FilmsStorage(BaseModel):
             return FilmsStorage()
         return cls.model_validate_json(MOVIE_STORAGE_FILEPATH.read_text())
 
-    def get(self) -> list[MovieRead]:
-        return [self.slug_to_film[film] for film in self.slug_to_film]
+    def get(self) -> list[Movie]:
+        return [
+            Movie.model_validate_json(json_data=json_data)
+            for json_data in redis.hvals(name=config.REDIS_MOVIE_HASH_NAME)
+        ]
 
     def get_by_slug(self, slug):
-        answer = redis.hget(
+        if answer := redis.hget(
             name=config.REDIS_MOVIE_HASH_NAME,
             key=slug,
-        )
-
-        if answer is None:
-            return None
-
-        return Movie.model_validate_json(answer)
+        ):
+            return Movie.model_validate_json(answer)
+        return None
 
     def create(self, film: MovieCreate) -> Movie:
         film = Movie(**film.model_dump())
