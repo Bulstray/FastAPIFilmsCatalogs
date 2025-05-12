@@ -16,7 +16,6 @@ from fastapi.security import (
     HTTPBasicCredentials,
 )
 
-from core.config import REDIS_TOKES_SET_NAME
 from .crud import storage
 from schemas.movie import Movie
 from ..auth.services.redis_tokens_helper import redis_tokens
@@ -70,13 +69,11 @@ def validate_api_token(api_token: HTTPAuthorizationCredentials):
 
 
 def validate_basic_auth(credentials: HTTPBasicCredentials | None):
-    print(1)
 
     if credentials and redis_users.validate_user_password(
         username=credentials.username,
         password=credentials.password,
     ):
-        print(2)
         return
 
     raise HTTPException(
