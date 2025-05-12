@@ -16,7 +16,7 @@ from fastapi.security import (
     HTTPBasicCredentials,
 )
 
-from core.config import API_TOKENS, USERS_DB, REDIS_TOKES_SET_NAME
+from core.config import REDIS_TOKES_SET_NAME
 from .crud import storage
 from schemas.movie import Movie
 from ..auth.services.redis_tokens_helper import redis_tokens
@@ -61,61 +61,11 @@ def save_storage_state(
         background_tasks.add_task(storage.save_state)
 
 
-def api_token_required(
-    request: Request,
-    api_token: Annotated[
-        HTTPAuthorizationCredentials | None,
-        Depends(static_api_token),
-    ],
-):
-    if request.method not in UNSAFE_METHODS:
-        return
-
-    if not api_token:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="API token is required",
-        )
-
-    if api_token not in API_TOKENS:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid API tokens",
-        )
-
-
 user_basic_auth = HTTPBasic(
     scheme_name="Basic Auth",
     description="Basic username + password auth",
     auto_error=False,
 )
-
-
-def user_basic_auth_required(
-    request: Request,
-    credentials: Annotated[
-        HTTPBasicCredentials | None,
-        Depends(user_basic_auth),
-    ],
-):
-
-    if request.method not in UNSAFE_METHODS:
-        return
-
-    if (
-        credentials
-        and credentials.username in USERS_DB
-        and USERS_DB[credentials.username] == credentials.password
-    ):
-        return
-
-    raise HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="User creential required. Invalid username or password",
-        headers={
-            "WWW-Authenticate": "Basic",
-        },
-    )
 
 
 def validate_api_token(api_token: HTTPAuthorizationCredentials):
