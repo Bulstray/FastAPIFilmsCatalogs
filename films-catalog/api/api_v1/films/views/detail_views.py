@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends, APIRouter, status, BackgroundTasks
 
 from api.api_v1.films.crud import storage
-from api.api_v1.films.dependencies import prefetch_film_by_id, api_token_required
+from api.api_v1.films.dependencies import prefetch_film_by_id
 from schemas.movie import Movie, MovieUpdate, MoviePartialUpdate, MovieRead
 
 router = APIRouter()
