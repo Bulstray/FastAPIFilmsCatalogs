@@ -51,16 +51,6 @@ def prefetch_film_by_id(slug) -> Movie:
     )
 
 
-def save_storage_state(
-    request: Request,
-    background_tasks: BackgroundTasks,
-):
-    yield
-    if request.method in UNSAFE_METHODS:
-        log.info("Add background task to save storage")
-        background_tasks.add_task(storage.save_state)
-
-
 user_basic_auth = HTTPBasic(
     scheme_name="Basic Auth",
     description="Basic username + password auth",

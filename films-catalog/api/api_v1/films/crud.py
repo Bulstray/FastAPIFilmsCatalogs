@@ -24,20 +24,6 @@ redis = Redis(
 
 
 class FilmsStorage(BaseModel):
-    slug_to_film: dict[str, Movie] = {}
-
-    def init_storage_from_state(self) -> None:
-        try:
-            data = FilmsStorage().from_state()
-            log.warning("Recovered data from storage file")
-        except ValidationError:
-            self.save_state()
-            log.warning("Rewritten storage file due validation error")
-            return
-
-    def save_state(self) -> None:
-        MOVIE_STORAGE_FILEPATH.write_text(self.model_dump_json(indent=2))
-        log.info("Saved movie to storage file.")
 
     def save_movie(self, movie: Movie) -> None:
         redis.hset(
@@ -45,12 +31,6 @@ class FilmsStorage(BaseModel):
             key=movie.slug,
             value=movie.model_dump_json(),
         )
-
-    @classmethod
-    def from_state(cls):
-        if not MOVIE_STORAGE_FILEPATH.exists():
-            return FilmsStorage()
-        return cls.model_validate_json(MOVIE_STORAGE_FILEPATH.read_text())
 
     def get(self) -> list[Movie]:
         return [
