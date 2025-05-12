@@ -1,7 +1,6 @@
 from fastapi import APIRouter, status, BackgroundTasks, Depends
 
 from api.api_v1.films.crud import storage
-from api.api_v1.films.dependencies import user_basic_auth_required
 
 from schemas.movie import Movie, MovieCreate, MovieRead
 
