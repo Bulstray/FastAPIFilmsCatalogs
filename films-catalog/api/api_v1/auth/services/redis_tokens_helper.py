@@ -21,7 +21,10 @@ class RedisTokensHelper(AbstractTokenHelper):
         self.tokens_set = tokens_set_name
 
     def add_token(self, token: str) -> None:
-        self.redis.sadd(self.tokens_set, token)
+        self.redis.sadd(
+            self.tokens_set,
+            token,
+        )
 
     def token_exist(self, token: str) -> bool:
         return bool(
@@ -31,8 +34,11 @@ class RedisTokensHelper(AbstractTokenHelper):
             )
         )
 
+    def delete_token(self, token: str) -> None:
+        self.redis.srem(self.tokens_set, token)
+
     def get_tokens(self) -> list[str]:
-        return list(self.redis.smembers("tokens"))
+        return list(self.redis.smembers(self.tokens_set))
 
 
 redis_tokens = RedisTokensHelper(
