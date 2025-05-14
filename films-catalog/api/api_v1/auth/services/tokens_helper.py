@@ -28,7 +28,18 @@ class AbstractTokenHelper(ABC):
     @abstractmethod
     def get_tokens(self) -> list[str]:
         """
-        Get tokens in storage
+        All tokens
+        :return:
+        """
+
+    @abstractmethod
+    def delete_token(
+        self,
+        token: str,
+    ) -> None:
+        """
+        Delete token
+        :param token:
         :return:
         """
 
