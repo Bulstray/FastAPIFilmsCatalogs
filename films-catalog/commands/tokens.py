@@ -22,25 +22,28 @@ def check(
             help="The token to check",
         ),
     ],
-):
+) -> None:
     print(
         f"Token [bold]{token}[/bold] [green]exists[/green]"
         if tokens.token_exist(token)
         else f"{token} [red]does not exist[/red]"
     )
+    return None
 
 
 @app.command(name="list")
-def get_tokens():
+def get_tokens() -> None:
     print(Markdown("# Available API Tokens"))
     print(Markdown("\n- ".join([""] + tokens.get_tokens())))
     print()
+    return None
 
 
 @app.command()
-def create():
+def create() -> None:
     new_token = tokens.generate_and_save_token()
     print(f"New token [bold]{new_token}[/bold] saved to db.")
+    return None
 
 
 @app.command()
@@ -49,7 +52,7 @@ def add(
         str,
         typer.Argument(help="The token to add"),
     ],
-):
+) -> None:
     """
     Add the provided token to db.
     """
@@ -57,6 +60,7 @@ def add(
         token,
     )
     print(f"Token [bold]{token}[/bold] added to db.")
+    return None
 
 
 @app.command(name="rm")
@@ -67,14 +71,16 @@ def delete(
             help="The token to delete",
         ),
     ],
-):
+) -> None:
     """
     Delete the provide token from db.
     """
 
     if not tokens.token_exist(token):
         print(f"Token [bold]{token} [red]does not exist[/red][/bold].")
-        return
+        return None
 
     tokens.delete_token(token)
     print(f"Token [bold]{token}[/bold] removed from db.")
+
+    return None
