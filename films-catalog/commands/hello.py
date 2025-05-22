@@ -17,5 +17,6 @@ def hello(
         str,
         Argument(help="Name to greet"),
     ],
-):
+) -> None:
     print(f"[bold] Hello [green]{name}[/green]![/bold]")
+    return None
