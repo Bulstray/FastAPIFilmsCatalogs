@@ -22,7 +22,7 @@ app.include_router(
 
 
 @app.get("/")
-def read_docs(request: Request):
+def read_docs(request: Request) -> dict[str, str]:
     docs_url = request.url.replace(
         path="/docs",
     )
