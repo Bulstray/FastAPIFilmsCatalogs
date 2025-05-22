@@ -39,7 +39,7 @@ static_api_token = HTTPBearer(
 )
 
 
-def prefetch_film_by_id(slug) -> Movie:
+def prefetch_film_by_id(slug: str) -> Movie:
     film: Movie | None = storage.get_by_slug(slug=slug)
     if film:
         return film
@@ -57,7 +57,7 @@ user_basic_auth = HTTPBasic(
 )
 
 
-def validate_api_token(api_token: HTTPAuthorizationCredentials):
+def validate_api_token(api_token: HTTPAuthorizationCredentials) -> None:
     if redis_tokens.token_exist(
         token=api_token.credentials,
     ):
@@ -68,7 +68,7 @@ def validate_api_token(api_token: HTTPAuthorizationCredentials):
     )
 
 
-def validate_basic_auth(credentials: HTTPBasicCredentials | None):
+def validate_basic_auth(credentials: HTTPBasicCredentials | None) -> None:
 
     if credentials and redis_users.validate_user_password(
         username=credentials.username,
@@ -93,7 +93,7 @@ def api_token_or_auth_required_for_unsafe_methods(
         HTTPBasicCredentials | None,
         Depends(user_basic_auth),
     ] = None,
-):
+) -> None:
     if request.method not in UNSAFE_METHODS:
         return
 
