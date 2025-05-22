@@ -1,3 +1,4 @@
+from typing import cast
 import logging
 
 from pydantic import BaseModel, ValidationError
@@ -50,7 +51,7 @@ class FilmsStorage(BaseModel):
             for json_data in redis.hvals(name=config.REDIS_MOVIE_HASH_NAME)
         ]
 
-    def get_by_slug(self, slug):
+    def get_by_slug(self, slug: str) -> Movie | None:
         if answer := redis.hget(
             name=config.REDIS_MOVIE_HASH_NAME,
             key=slug,
@@ -58,23 +59,26 @@ class FilmsStorage(BaseModel):
             return Movie.model_validate_json(answer)
         return None
 
-    def exists(self, slug):
-        return redis.hexists(
-            name=config.REDIS_MOVIE_HASH_NAME,
-            key=slug,
+    def exists(self, slug: str) -> bool:
+        return cast(
+            bool,
+            redis.hexists(
+                name=config.REDIS_MOVIE_HASH_NAME,
+                key=slug,
+            ),
         )
 
-    def create_or_raise_if_exists(self, movie_in: MovieCreate):
+    def create_or_raise_if_exists(self, movie_in: MovieCreate) -> Movie | None:
         if not self.exists(movie_in.slug):
             return self.create(movie_in)
 
         raise MovieAlreadyExists(movie_in.slug)
 
     def create(self, film: MovieCreate) -> Movie:
-        film = Movie(**film.model_dump())
-        self.save_movie(movie=film)
+        movie = Movie(**film.model_dump())
+        self.save_movie(movie=movie)
         log.info("Create new movie.")
-        return film
+        return movie
 
     def delete_by_slag(self, slug: str) -> None:
         redis.hdel(config.REDIS_MOVIE_HASH_NAME, slug)
@@ -98,7 +102,7 @@ class FilmsStorage(BaseModel):
         self,
         movie: Movie,
         movie_in: MoviePartialUpdate,
-    ):
+    ) -> Movie:
         for field_name, value in movie_in.model_dump(exclude_unset=True).items():
             setattr(movie, field_name, value)
 
