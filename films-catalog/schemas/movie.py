@@ -36,4 +36,6 @@ class MovieUpdate(MovieBase):
 
 
 class MoviePartialUpdate(MovieBase):
-    """Модель для частичного обновления фильма"""
+    """
+    Модель для частичного обновления фильма
+    """
