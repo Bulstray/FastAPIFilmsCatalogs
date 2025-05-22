@@ -11,7 +11,7 @@ router = APIRouter()
     "/",
     response_model=list[MovieRead],
 )
-def read_film_list():
+def read_film_list() -> list[Movie]:
     return storage.get()
 
 
@@ -35,7 +35,7 @@ def read_film_list():
 def add_film(
     create_film: MovieCreate,
     background_tasks: BackgroundTasks,
-):
+) -> Movie | None:
     try:
         return storage.create_or_raise_if_exists(create_film)
     except MovieAlreadyExists:

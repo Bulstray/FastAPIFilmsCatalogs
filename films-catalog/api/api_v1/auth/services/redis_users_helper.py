@@ -1,3 +1,5 @@
+from typing import cast
+
 from redis import Redis
 
 from .users_helper import AbstractUserHelper
@@ -18,7 +20,7 @@ class RedisUsersHelper(AbstractUserHelper):
         self,
         username: str,
     ) -> str | None:
-        return self.redis.get(name=username)
+        return cast(str | None, self.redis.get(name=username))
 
 
 redis_users = RedisUsersHelper(
