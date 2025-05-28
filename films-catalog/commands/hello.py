@@ -1,7 +1,7 @@
 from typing import Annotated
 
-from typer import Typer, Argument
 from rich import print
+from typer import Argument, Typer
 
 app = Typer(
     no_args_is_help=True,

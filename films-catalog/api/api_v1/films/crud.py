@@ -1,17 +1,15 @@
-from typing import cast
 import logging
+from typing import cast
 
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel
 from redis import Redis
 
-from core.config import MOVIE_STORAGE_FILEPATH
 from core import config
 from schemas.movie import (
     Movie,
     MovieCreate,
-    MovieUpdate,
     MoviePartialUpdate,
-    MovieRead,
+    MovieUpdate,
 )
 
 log = logging.getLogger(__name__)

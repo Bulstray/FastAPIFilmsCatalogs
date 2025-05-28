@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from subprocess import check_output
 
 
 class AbstractUserHelper(ABC):

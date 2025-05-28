@@ -24,9 +24,11 @@ def check(
     ],
 ) -> None:
     print(
-        f"Token [bold]{token}[/bold] [green]exists[/green]"
-        if tokens.token_exist(token)
-        else f"{token} [red]does not exist[/red]"
+        (
+            f"Token [bold]{token}[/bold] [green]exists[/green]"
+            if tokens.token_exist(token)
+            else f"{token} [red]does not exist[/red]"
+        ),
     )
     return None
 

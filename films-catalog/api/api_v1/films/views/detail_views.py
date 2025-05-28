@@ -1,10 +1,10 @@
 from typing import Annotated
 
-from fastapi import Depends, APIRouter, status, BackgroundTasks
+from fastapi import APIRouter, BackgroundTasks, Depends, status
 
 from api.api_v1.films.crud import storage
 from api.api_v1.films.dependencies import prefetch_film_by_id
-from schemas.movie import Movie, MovieUpdate, MoviePartialUpdate, MovieRead
+from schemas.movie import Movie, MoviePartialUpdate, MovieRead, MovieUpdate
 
 router = APIRouter()
 
@@ -13,13 +13,13 @@ MovieBySlug = Annotated[Movie, Depends(prefetch_film_by_id)]
 
 
 @router.get(
-    "/film/{slug}",
+    "/film/{slug}/",
     response_model=MovieRead,
 )
 def get_film_by_id(
-    movie: MovieBySlug,
+    slug: MovieBySlug,
 ) -> Movie:
-    return movie
+    return slug
 
 
 @router.put(
@@ -27,12 +27,12 @@ def get_film_by_id(
     response_model=MovieRead,
 )
 def update_film_details(
-    movie: MovieBySlug,
+    slug: MovieBySlug,
     movie_in: MovieUpdate,
     background_tasks: BackgroundTasks,
 ) -> Movie:
     return storage.update(
-        movie=movie,
+        movie=slug,
         movie_in=movie_in,
     )
 
@@ -42,12 +42,12 @@ def update_film_details(
     response_model=MovieRead,
 )
 def update_partial_details(
-    movie: MovieBySlug,
+    slug: MovieBySlug,
     movie_in: MoviePartialUpdate,
     background_tasks: BackgroundTasks,
 ) -> Movie:
     return storage.update_partial(
-        movie,
+        slug,
         movie_in,
     )
 
@@ -57,7 +57,7 @@ def update_partial_details(
     status_code=status.HTTP_204_NO_CONTENT,
 )
 def delete_movie(
-    movie: MovieBySlug,
+    slug: MovieBySlug,
     background_tasks: BackgroundTasks,
 ) -> None:
-    storage.delete(movie=movie)
+    storage.delete(movie=slug)

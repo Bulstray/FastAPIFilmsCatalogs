@@ -31,7 +31,7 @@ class RedisTokensHelper(AbstractTokenHelper):
             self.redis.sismember(
                 self.tokens_set,
                 token,
-            )
+            ),
         )
 
     def delete_token(self, token: str) -> None:
