@@ -13,4 +13,13 @@ dependencies = [
 [dependency-groups]
 dev = [
     "mypy>=1.15.0",
+    "ruff>=0.11.11",
+]
+
+
+# mypy setttings
+[tool.mypy]
+strict = true
+plugins = [
+    'pydantic.mypy'
 ]
