@@ -13,6 +13,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "mypy>=1.15.0",
+    "pre-commit>=4.2.0",
     "ruff>=0.11.11",
 ]
 
@@ -60,7 +61,6 @@ exclude = [
     "node_modules",
     "site-packages",
     "venv",
-    '.venv'
 ]
 
 # Same as Black.
@@ -75,7 +75,13 @@ target-version = "py313"
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
 # McCabe complexity (`C901`) by default.
 select = [
-    'FAST'
+    'ANN', #flake8-annotation (ANN)
+    'FAST', # FASTAPI (FAST)
+    'I', # isort(i)
+    'F', # Pyflakes(F)
+    "COM", # flake8-commas(COM)
+    "Q", # flake8-quotes(Q)
+    'AIR',
 ]
 ignore = [
 
