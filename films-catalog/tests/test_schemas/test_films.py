@@ -34,3 +34,23 @@ class MovieCreateTestCase(TestCase):
             movie_in.notes,
             movie.notes,
         )
+
+    def test_movie_create_accepts_different_movie(self) -> None:
+        data = [
+            ("name", "desc", "slug"),
+            ("description1", "desc2", "slug3"),
+            ("description2", "desc3", "slug4"),
+        ]
+
+        for name, desc, slug in data:
+            with self.subTest(name=name, desc=desc, slug=slug):
+                movie_in = MovieCreate(
+                    slug=slug,
+                    name=name,
+                    description=desc,
+                )
+
+                movie = Movie(**movie_in.model_dump())
+                self.assertEqual(movie_in.slug, movie.slug)
+                self.assertEqual(movie_in.name, movie.name)
+                self.assertEqual(movie_in.description, movie.description)
