@@ -1,8 +1,14 @@
+from typing import Annotated
+
+from annotated_types import Len
 from pydantic import BaseModel
 
 
 class MovieBase(BaseModel):
-    slug: str
+    slug: Annotated[
+        str,
+        Len(min_length=3, max_length=10),
+    ]
     name: str
     description: str
 
