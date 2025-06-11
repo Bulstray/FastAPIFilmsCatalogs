@@ -59,13 +59,11 @@ class MovieCreateTestCase(TestCase):
 
     def test_movie_create_accepts_different_movies(self) -> None:
         with self.assertRaises(ValidationError) as exc_info:
-
-            movie: MovieCreate = MovieCreate(
+            MovieCreate(
                 slug="so",
                 name="some-name",
                 description="some-description",
             )
-        print(movie)
         print(exc_info.exception)
 
     def test_movie_create_raises_validation_error_regex(self) -> None:
@@ -73,11 +71,9 @@ class MovieCreateTestCase(TestCase):
             ValidationError,
             expected_regex="String should have at least 3 characters",
         ) as exc_info:
-            movie_in: MovieCreate = MovieCreate(
+            MovieCreate(
                 slug="s",
                 name="some-name",
                 description="some-description",
             )
-
-        print(movie_in)
         print(exc_info.exception)
