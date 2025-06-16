@@ -45,3 +45,7 @@ class MoviePartialUpdate(MovieBase):
     """
     Модель для частичного обновления фильма
     """
+
+    name: str | None = None
+    description: str | None = None
+    slug: str | None = None
