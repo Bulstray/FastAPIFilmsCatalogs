@@ -1,16 +1,13 @@
 import random
 import string
-from os import getenv
+from collections.abc import Generator
 from typing import ClassVar
 from unittest import TestCase
 
-from api.api_v1.films.crud import storage
-from schemas.movie import Movie, MovieCreate, MoviePartialUpdate, MovieUpdate
+import pytest
 
-if getenv("TESTING") == 1:
-    raise EnvironmentError(
-        "Environment is not ready for testing",
-    )
+from api.api_v1.films.crud import MovieAlreadyExists, storage
+from schemas.movie import Movie, MovieCreate, MoviePartialUpdate, MovieUpdate
 
 
 def create_movie() -> Movie:
@@ -116,3 +113,20 @@ class MovieStorageGetMovieTestCase(TestCase):
                     movie,
                     db_movies,
                 )
+
+
+@pytest.fixture()
+def movie() -> Generator[Movie]:
+    movie = create_movie()
+    yield movie
+    storage.delete(movie)
+
+
+def test_create_or_raise_if_exists(movie: Movie) -> None:
+    movie_create = MovieCreate(**movie.model_dump())
+    with pytest.raises(
+        MovieAlreadyExists,
+    ) as exc_info:
+        storage.create_or_raise_if_exists(movie_create)
+
+        assert exc_info.value.args[0] == movie_create.slug
