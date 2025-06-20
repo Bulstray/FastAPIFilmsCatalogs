@@ -1,10 +1,12 @@
 from os import getenv
 from unittest import TestCase
 
+import pytest
+
 from api.api_v1.auth.services import redis_tokens
 
 if getenv("TESTING") != "1":
-    raise OSError(
+    pytest.exit(
         "Environment is not ready for testing",
     )
 
