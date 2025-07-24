@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from redis import Redis
 
 from core import config
+from core.config import settings
 from schemas.movie import (
     Movie,
     MovieCreate,
@@ -15,9 +16,9 @@ from schemas.movie import (
 log = logging.getLogger(__name__)
 
 redis = Redis(
-    host=config.REDIS_HOST,
-    port=config.REDIS_PORT,
-    db=config.REDIS_DB_MOVIE,
+    host=settings.redis.connection.host,
+    port=settings.redis.connection.port,
+    db=settings.redis.db.movies,
     decode_responses=True,
 )
 
@@ -38,7 +39,7 @@ class FilmsStorage(BaseModel):
 
     def save_movie(self, movie: Movie) -> None:
         redis.hset(
-            name=config.REDIS_MOVIE_HASH_NAME,
+            name=settings.redis.collections_name.movie_hash,
             key=movie.slug,
             value=movie.model_dump_json(),
         )
@@ -46,12 +47,14 @@ class FilmsStorage(BaseModel):
     def get(self) -> list[Movie]:
         return [
             Movie.model_validate_json(json_data=json_data)
-            for json_data in redis.hvals(name=config.REDIS_MOVIE_HASH_NAME)
+            for json_data in redis.hvals(
+                name=settings.redis.collections_name.movie_hash,
+            )
         ]
 
     def get_by_slug(self, slug: str) -> Movie | None:
         if answer := redis.hget(
-            name=config.REDIS_MOVIE_HASH_NAME,
+            name=config.settings.redis.collections_name.movie_hash,
             key=slug,
         ):
             return Movie.model_validate_json(answer)
@@ -61,7 +64,7 @@ class FilmsStorage(BaseModel):
         return cast(
             bool,
             redis.hexists(
-                name=config.REDIS_MOVIE_HASH_NAME,
+                name=settings.redis.collections_name.movie_hash,
                 key=slug,
             ),
         )
@@ -79,7 +82,7 @@ class FilmsStorage(BaseModel):
         return movie
 
     def delete_by_slag(self, slug: str) -> None:
-        redis.hdel(config.REDIS_MOVIE_HASH_NAME, slug)
+        redis.hdel(settings.redis.collections_name.movie_hash, slug)
 
     def delete(self, movie: Movie) -> None:
         self.delete_by_slag(slug=movie.slug)
