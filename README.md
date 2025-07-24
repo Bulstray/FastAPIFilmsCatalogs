@@ -2,6 +2,8 @@
 
 ## Develop
 
+Check Github Actions after any push.
+
 ### Setup
 
 Right click 'films-catalog' -> Mark Directory as -> Source root
