@@ -1,0 +1,5 @@
+movies:
+  redis:
+    db:
+      default: 1
+      tokens: 10
