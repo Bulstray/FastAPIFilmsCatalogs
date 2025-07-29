@@ -176,5 +176,4 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# Virtual environments
-movie.json
+config.default.yaml
