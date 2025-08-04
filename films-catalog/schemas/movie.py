@@ -3,6 +3,8 @@ from typing import Annotated
 from annotated_types import Len
 from pydantic import BaseModel
 
+DESCRIPTION_MAX_LENGTH = 200
+
 
 class MovieBase(BaseModel):
     slug: Annotated[
@@ -10,7 +12,10 @@ class MovieBase(BaseModel):
         Len(min_length=3, max_length=10),
     ]
     name: str
-    description: str
+    description: Annotated[
+        str,
+        Len(max_length=200),
+    ]
 
 
 class MovieRead(MovieBase):
