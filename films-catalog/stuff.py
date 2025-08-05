@@ -12,7 +12,6 @@ redis = Redis(
 
 def main() -> None:
     redis.set("name", "Ramil")
-    print(redis.get("name"))
 
     redis.delete("name")
     print(redis.get("name"))
