@@ -10,6 +10,13 @@ Right click 'films-catalog' -> Mark Directory as -> Source root
 
 ### Configure pre-commit
 
+### Install dependencies
+
+Install all packages
+```shell
+uv sync
+```
+
 Install pre-commit hook:
 ```shell
 pre-commit intall
