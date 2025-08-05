@@ -81,5 +81,3 @@ class Settings(BaseSettings):
 
 # noinspection PyArgumentList
 settings = Settings()
-
-print(settings.redis.connection.port)
