@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "films-catalog/**"
 
 jobs:
   lint:
