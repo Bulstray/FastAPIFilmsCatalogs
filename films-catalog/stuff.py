@@ -15,7 +15,9 @@ def main() -> None:
 
     redis.delete("name")
     print(redis.get("name"))
-    print('spam', redis.get("spam"))
+
+    print(redis.get("name"))
+    print("spam", redis.get("spam"))
 
     return None
 
