@@ -26,7 +26,7 @@ jobs:
         run: black --check --diff ./
 
   list-dependencies:
-    runs-on: ubuntu-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
