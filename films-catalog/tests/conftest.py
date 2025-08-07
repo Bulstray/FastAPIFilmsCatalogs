@@ -1,12 +1,11 @@
 import random
 import string
 from os import getenv
-from typing import Generator
 
 import pytest
 
 from api.api_v1.films.crud import storage
-from schemas.movie import Movie
+from schemas.movie import Movie, MovieCreate
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -19,15 +18,15 @@ def build_movie_create(
     slug: str,
     description: str,
     name: str = "Some name",
-) -> Movie:
-    return Movie(
+) -> MovieCreate:
+    return MovieCreate(
         slug=slug,
         description=description,
         name=name,
     )
 
 
-def build_movie_random_slug(description: str, name: str) -> Movie:
+def build_movie_random_slug(description: str, name: str) -> MovieCreate:
     return build_movie_create(
         slug="".join(
             random.choices(
@@ -57,10 +56,3 @@ def create_movie_random_slug(
 ) -> Movie:
     movie = build_movie_random_slug(description, name)
     return storage.create(movie)
-
-
-@pytest.fixture()
-def movie() -> Generator[Movie]:
-    movie = build_movie_random_slug()
-    yield movie
-    storage.delete(movie)

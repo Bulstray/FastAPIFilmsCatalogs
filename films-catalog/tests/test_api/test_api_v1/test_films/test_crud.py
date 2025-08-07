@@ -97,10 +97,9 @@ class MovieStorageGetMovieTestCase(TestCase):
         expected_slugs = {su.slug for su in self.movies}
         slugs = {su.slug for su in movies}
 
-        expected_diff = set()
         diff = expected_slugs - slugs
 
-        self.assertEqual(expected_diff, diff)
+        self.assertEqual(set(), diff)
 
     def test_get_by_slug(self) -> None:
         for movie in self.movies:
