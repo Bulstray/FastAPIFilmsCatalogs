@@ -5,11 +5,11 @@ from fastapi.testclient import TestClient
 
 from api.api_v1.films.crud import storage
 from main import app
-from schemas.movie import Movie
+from schemas.movie import Movie, MovieCreate
 
 
 def create_movie(slug: str) -> Movie:
-    movie = Movie(
+    movie = MovieCreate(
         slug=slug,
         description="some description",
         name="some name",
