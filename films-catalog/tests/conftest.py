@@ -1,12 +1,11 @@
 import random
 import string
 from os import getenv
-from typing import Generator
 
 import pytest
 
 from api.api_v1.films.crud import storage
-from schemas.movie import MovieCreate, Movie
+from schemas.movie import Movie, MovieCreate
 
 
 @pytest.fixture(scope="session", autouse=True)
