@@ -25,7 +25,7 @@ jobs:
       - name: Black ◼️
         run: black --check --diff ./
 
-  run-mypy:
+  run-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,7 +38,7 @@ jobs:
       - name: Install the project
         run: uv sync --locked --all-extras --dev
       - name: Run ruff
-        uses: astral/ruff-action@v3
+        uses: astral-sh/ruff-action@v3
         with:
           version-file: 'pyproject.toml'
       - name: Run mypy
