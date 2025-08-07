@@ -63,4 +63,7 @@ class TestUpdatePartial:
 
         assert response.status_code == status.HTTP_200_OK, response.text
         movie_db = storage.get_by_slug(movie.slug)
+        if movie_db is None:
+            assert False, "Movie not found"
         assert movie_db.description == new_description
+        return None
