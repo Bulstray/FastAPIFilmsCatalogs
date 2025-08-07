@@ -10,12 +10,11 @@ redis = Redis(
 )
 
 
-def main() -> None:
+def main():
     redis.set("name", "Ramil")
 
     redis.delete("name")
     print(redis.get("name"))
-    1 + ''
 
     print(redis.get("name"))
     print("spam", redis.get("spam"))
