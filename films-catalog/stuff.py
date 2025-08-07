@@ -10,7 +10,7 @@ redis = Redis(
 )
 
 
-def main():
+def main() -> None:
     redis.set("name", "Ramil")
 
     redis.delete("name")
