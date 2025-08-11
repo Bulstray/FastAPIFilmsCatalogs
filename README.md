@@ -4,6 +4,7 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Mypy](https://img.shields.io/badge/types-Mypy-blue.svg)](http://mypy-lang.org/)
 [![Python Version](https://img.shields.io/badge/python-3.13+-blue.svg)](.python-version)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 ## Develop
 
 Check GitHub Actions after any push.
