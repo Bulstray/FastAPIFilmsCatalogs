@@ -1,5 +1,7 @@
 # FastAPI Films Catalog
 
+[![Python checks 🐍](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yaml/badge.svg)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yaml)
+
 ## Develop
 
 Check GitHub Actions after any push.
