@@ -30,7 +30,7 @@ class LoggingConfig(BaseModel):
 
 
 class RedisConnectionConfig(BaseModel):
-    host: str = "localhost"
+    host: str = getenv("REDIS_HOST", "localhost")
     port: int = 6380 if getenv("TESTING") else 6379
 
 
