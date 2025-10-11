@@ -14,11 +14,11 @@ from fastapi.security import (
     HTTPBearer,
 )
 
+from dependencies.movies import GetMoviesStorage
 from schemas.movie import Movie
 
 from ..auth.services.redis_tokens_helper import redis_tokens
 from ..auth.services.redis_users_helper import redis_users
-from .crud import storage
 
 log = logging.getLogger(__name__)
 
@@ -38,7 +38,10 @@ static_api_token = HTTPBearer(
 )
 
 
-def prefetch_film_by_id(slug: str) -> Movie:
+def prefetch_film_by_id(
+    slug: str,
+    storage: GetMoviesStorage,
+) -> Movie:
     film: Movie | None = storage.get_by_slug(slug=slug)
     if film:
         return film
