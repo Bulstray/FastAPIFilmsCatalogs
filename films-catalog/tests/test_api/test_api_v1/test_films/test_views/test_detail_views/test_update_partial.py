@@ -3,9 +3,9 @@ from _pytest.fixtures import SubRequest
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from api.api_v1.films.crud import storage
 from main import app
 from schemas.movie import DESCRIPTION_MAX_LENGTH, Movie
+from storage.movies.crud import storage
 from tests.conftest import create_movie
 
 
