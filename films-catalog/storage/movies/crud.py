@@ -12,6 +12,7 @@ from schemas.movie import (
     MoviePartialUpdate,
     MovieUpdate,
 )
+from storage.movies.exceptions import MovieAlreadyExists
 
 log = logging.getLogger(__name__)
 
@@ -21,18 +22,6 @@ redis = Redis(
     db=settings.redis.db.movies,
     decode_responses=True,
 )
-
-
-class MovieBaseError(Exception):
-    """
-    Base exception for short url CRUD actions.
-    """
-
-
-class MovieAlreadyExists(MovieBaseError):
-    """
-    Raised on short url creation if such slug already exists.
-    """
 
 
 class FilmsStorage(BaseModel):
