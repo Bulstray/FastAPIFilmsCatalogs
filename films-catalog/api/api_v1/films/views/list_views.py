@@ -1,7 +1,8 @@
 from fastapi import APIRouter, BackgroundTasks, HTTPException, status
 
-from api.api_v1.films.crud import MovieAlreadyExists, storage
 from schemas.movie import Movie, MovieCreate, MovieRead
+from storage.movies.crud import storage
+from storage.movies.exceptions import MovieAlreadyExists
 
 router = APIRouter()
 
