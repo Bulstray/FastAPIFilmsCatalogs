@@ -101,5 +101,3 @@ class Settings(BaseSettings):
 
 # noinspection PyArgumentList
 settings = Settings()
-
-print(settings.logging.log_level_name)
