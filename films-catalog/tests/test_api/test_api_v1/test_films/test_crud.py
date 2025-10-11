@@ -6,8 +6,9 @@ from unittest import TestCase
 
 import pytest
 
-from api.api_v1.films.crud import MovieAlreadyExists, storage
 from schemas.movie import Movie, MovieCreate, MoviePartialUpdate, MovieUpdate
+from storage.movies.crud import storage
+from storage.movies.exceptions import MovieAlreadyExists
 
 
 def create_movie() -> Movie:
