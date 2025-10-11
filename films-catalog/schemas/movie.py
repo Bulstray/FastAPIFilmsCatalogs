@@ -1,7 +1,7 @@
 from typing import Annotated
 
 from annotated_types import Len
-from pydantic import BaseModel
+from pydantic import AnyHttpUrl, BaseModel
 
 DESCRIPTION_MAX_LENGTH = 200
 
@@ -16,6 +16,7 @@ class MovieBase(BaseModel):
         str,
         Len(max_length=200),
     ]
+    url: AnyHttpUrl
 
 
 class MovieRead(MovieBase):
@@ -29,15 +30,11 @@ class Movie(MovieBase):
     Модель для хранения данных о фильме
     """
 
-    notes: str = ""
-
 
 class MovieCreate(MovieBase):
     """
     Модель для добавления в базу данных фильм
     """
-
-    notes: str = ""
 
 
 class MovieUpdate(MovieBase):
