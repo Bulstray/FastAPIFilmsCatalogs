@@ -1,0 +1,36 @@
+{% from 'macro/form_fields.html' import form_field %}
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Create new Movie
+{% endblock %}
+
+{% block main %}
+  <h1>Create a new Movie</h1>
+
+  <div class="row">
+    <div class="col col-12 col-md-6 col-lg-4">
+      <form action="{{ url_for('movies:create') }}" method="post">
+        {% for field_name, field_schema in model_schema.properties.items() %}
+          {% set is_required = field_name in model_schema.get('required', []) %}
+
+          {{ form_field(
+                field_name=field_name,
+                field_schema=field_schema,
+                is_required=is_required,
+                default=field_schema.default) }}
+        {% endfor %}
+
+
+        <input type="submit" value="Create" class="btn btn-primary">
+      </form>
+    </div>
+  </div>
+  <div class="mt-5">
+    <a class="btn btn-secondary"
+      href="{{ url_for('movies:list') }}">
+      Back to Movies list
+    </a>
+  </div>
+{% endblock %}
