@@ -32,8 +32,15 @@
       </table>
     </div>
 
+    <div>
+      <a
+        class="btn btn-outline-primary"
+        href="{{ url_for('movies:create-view') }}">Create_new</a>
+    </div>
+
   {% else %}
     <h2>No movies yet</h2>
+    <h3>You can <a href="{{ url_for('movies:create-view') }}">create a new one</a></h3>
   {% endif %}
 
 {% endblock %}
