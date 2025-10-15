@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter
 from fastapi.requests import Request
 from fastapi.responses import HTMLResponse
@@ -12,7 +14,7 @@ router = APIRouter(include_in_schema=False)
     name="home",
 )
 def read_docs(request: Request) -> HTMLResponse:
-    context = {}
+    context: dict[str, Any] = {}
     features = [
         "Create new movie",
         "Real time statistics",
