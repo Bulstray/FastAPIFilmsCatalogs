@@ -21,6 +21,7 @@ def create_movie() -> Movie:
         ),
         name="film",
         description="some description",
+        url="https://www.google.com",
     )
 
     return storage.create(movie_in)

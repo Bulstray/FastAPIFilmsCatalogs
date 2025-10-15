@@ -3,7 +3,7 @@ from unittest import TestCase
 
 import pytest
 
-from api.api_v1.auth.services import redis_tokens
+from services.auth import redis_tokens
 
 if getenv("TESTING") != "1":
     pytest.exit(

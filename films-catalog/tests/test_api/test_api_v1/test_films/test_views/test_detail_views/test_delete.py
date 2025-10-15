@@ -13,6 +13,7 @@ def create_movie(slug: str) -> Movie:
         slug=slug,
         description="some description",
         name="some name",
+        url="https://www.google.com",
     )
     return storage.create(movie)
 

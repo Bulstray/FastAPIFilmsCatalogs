@@ -11,6 +11,7 @@ class MovieCreateTestCase(TestCase):
             slug="some-slug",
             description="some-description",
             name="some-name",
+            url="https://some-url.com",
         )
 
         movie = Movie(
@@ -32,25 +33,16 @@ class MovieCreateTestCase(TestCase):
             movie.description,
         )
 
-        self.assertEqual(
-            movie_in.notes,
-            movie.notes,
-        )
-
     def test_movie_create_accepts_different_movie(self) -> None:
         data = [
-            ("name", "desc", "slug"),
-            ("description1", "desc2", "slug3"),
-            ("description2", "desc3", "slug4"),
+            ("name", "desc", "slug", "https://www.google.com"),
+            ("description1", "desc2", "slug3", "https://www.google.com"),
+            ("description2", "desc3", "slug4", "https://www.google.com"),
         ]
 
-        for name, desc, slug in data:
-            with self.subTest(name=name, desc=desc, slug=slug):
-                movie_in = MovieCreate(
-                    slug=slug,
-                    name=name,
-                    description=desc,
-                )
+        for name, desc, slug, url in data:
+            with self.subTest(name=name, desc=desc, slug=slug, url=url):
+                movie_in = MovieCreate(slug=slug, name=name, description=desc, url=url)
 
                 movie = Movie(**movie_in.model_dump())
                 self.assertEqual(movie_in.slug, movie.slug)
@@ -63,6 +55,7 @@ class MovieCreateTestCase(TestCase):
                 slug="so",
                 name="some-name",
                 description="some-description",
+                url="https://some-url.com",
             )
         print(exc_info.exception)
 
@@ -75,5 +68,6 @@ class MovieCreateTestCase(TestCase):
                 slug="s",
                 name="some-name",
                 description="some-description",
+                url="https://some-url.com",
             )
         print(exc_info.exception)

@@ -18,11 +18,13 @@ def build_movie_create(
     slug: str,
     description: str,
     name: str = "Some name",
+    url: str = "https://www.google.com",
 ) -> MovieCreate:
     return MovieCreate(
         slug=slug,
         description=description,
         name=name,
+        url=url,
     )
 
 
@@ -42,10 +44,12 @@ def build_movie_random_slug(description: str, name: str) -> MovieCreate:
 def create_movie(
     slug: str,
     description: str = "A movie",
+    url: str = "https://www.google.com",
 ) -> Movie:
     movie = build_movie_create(
         slug,
         description=description,
+        url=url,
     )
     return storage.create(movie)
 
