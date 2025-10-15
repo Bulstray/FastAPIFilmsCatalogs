@@ -16,7 +16,7 @@ def list_view(
     storage: GetMoviesStorage,
 ) -> HTMLResponse:
     context: dict[str, Any] = {}
-    movies: list = storage.get()
+    movies = storage.get()
     context.update(movies=movies)
 
     return templates.TemplateResponse(
