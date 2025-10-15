@@ -36,12 +36,12 @@ def get_page_create_movie(request: Request) -> HTMLResponse:
 def format_pydantic_errors(
     error: ValidationError,
 ) -> dict[str, str]:
-    return {err["loc"][0]: err["msg"] for err in error.errors()}
+    return {f"{err["loc"][0]}": err["msg"] for err in error.errors()}
 
 
 def create_view_validation_response(
     request: Request,
-    errors: dict[str, str] = None,
+    errors: dict[str, str] | None = None,
     form_data: object = None,
     form_validated: bool = True,
 ) -> HTMLResponse:
