@@ -49,5 +49,8 @@ class MoviePartialUpdate(BaseModel):
     """
 
     name: str | None = None
-    description: str | None = None
-    slug: str | None = None
+    description: Annotated[
+        str | None,
+        Len(max_length=200),
+    ] = None
+    url: AnyHttpUrl | None = None
