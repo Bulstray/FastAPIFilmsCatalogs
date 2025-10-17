@@ -6,11 +6,17 @@ from pydantic import ValidationError
 
 from dependencies.movies import GetMoviesStorage
 from schemas.movie import MovieCreate
+from services.movies.form_responce_helper import FormResponseHelper
 from storage.movies.exceptions import MovieAlreadyExists
 from templating import templates
 
 router = APIRouter(
     prefix="/create",
+)
+
+form_response = FormResponseHelper(
+    model=MovieCreate,
+    template_name="movies/create.html",
 )
 
 
@@ -20,17 +26,7 @@ router = APIRouter(
     response_class=HTMLResponse,
 )
 def get_page_create_movie(request: Request) -> HTMLResponse:
-    context: dict[str, Any] = {}
-    model_schema = MovieCreate.model_json_schema()
-    context.update(
-        model_schema=model_schema,
-    )
-
-    return templates.TemplateResponse(
-        request=request,
-        name="movies/create.html",
-        context=context,
-    )
+    return form_response.render(request)
 
 
 def format_pydantic_errors(
@@ -76,11 +72,11 @@ async def create_movie(
         try:
             movie_create = MovieCreate.model_validate(form)
         except ValidationError as error:
-            errors = format_pydantic_errors(error)
-            return create_view_validation_response(
+            return form_response.render(
                 request=request,
-                errors=errors,
                 form_data=form,
+                pydantic_errors=error,
+                form_validated=True,
             )
 
     try:
@@ -102,4 +98,5 @@ async def create_movie(
         request=request,
         errors=errors,
         form_data=movie_create,
+        form_validated=True,
     )
