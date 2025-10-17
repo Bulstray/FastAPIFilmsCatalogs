@@ -36,7 +36,7 @@ def validate_basic_auth(credentials: HTTPBasicCredentials | None) -> None:
         username=credentials.username,
         password=credentials.password,
     ):
-        return
+        return None
 
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
