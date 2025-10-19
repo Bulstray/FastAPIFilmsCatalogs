@@ -2,6 +2,7 @@ import logging
 
 import uvicorn
 from fastapi import FastAPI
+from starlette.middleware.sessions import SessionMiddleware
 
 from api import router as api_router
 from app_lifespan import lifespan
@@ -18,13 +19,14 @@ app = FastAPI(
     title="Films Catalog",
     lifespan=lifespan,
 )
-app.include_router(
-    main_router,
+
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=settings.session.secret_key,
 )
 
-app.include_router(
-    api_router,
-)
+app.include_router(main_router)
+app.include_router(api_router)
 
 if __name__ == "__main__":
     uvicorn.run(app)
