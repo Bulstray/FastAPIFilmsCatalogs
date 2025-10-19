@@ -1,0 +1,5 @@
+movies:
+  logging:
+    log_level_name: WARNING
+  session:
+    secret_key: ""
