@@ -79,7 +79,7 @@ class FilmsStorage(BaseModel):
     def update(
         self,
         movie: Movie,
-        movie_in: MovieUpdate,
+        movie_in: MovieUpdate | MoviePartialUpdate,
     ) -> Movie:
 
         for field_name, value in movie_in:
