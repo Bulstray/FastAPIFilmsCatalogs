@@ -176,4 +176,4 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-films-catalog/config.default.yaml
+films-catalog/config.local.yaml
