@@ -71,7 +71,7 @@ jobs:
       - name: Install dependencies
         run: uv sync --locked --all-extras --dev
       - name: Run python tests
-        run: uv run pytest
+        run: uv run pytest films-catalog --cov=films-catalog --cov-report=xml:coverage.xml
         env:
           TESTING: 1
           REDIS_PORT: 6379
