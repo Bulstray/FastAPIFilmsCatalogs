@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import TypedDict, cast
 
 from fastapi.requests import Request
 
@@ -27,4 +27,5 @@ def flash(
 
 
 def get_flashed_messages(request: Request) -> list[Message]:
-    return request.session.pop(FLASHED_MESSAGES_KEY, [])
+    messages = request.session.pop(FLASHED_MESSAGES_KEY, [])
+    return cast(list[Message], messages)
