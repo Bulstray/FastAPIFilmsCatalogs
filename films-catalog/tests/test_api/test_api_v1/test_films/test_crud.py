@@ -9,6 +9,7 @@ import pytest
 from schemas.movie import Movie, MovieCreate, MoviePartialUpdate, MovieUpdate
 from storage.movies.crud import storage
 from storage.movies.exceptions import MovieAlreadyExists
+from tests.conftest import build_movie_random_slug
 
 
 def create_movie() -> Movie:
@@ -131,3 +132,18 @@ def test_create_or_raise_if_exists(movie: Movie) -> None:
         storage.create_or_raise_if_exists(movie_create)
 
         assert exc_info.value.args[0] == movie_create.slug
+
+
+def test_create_twice() -> None:
+    movie_create = build_movie_random_slug(description="asdsdadas", name="dfasasd")
+
+    # create new movie successful
+    storage.create_or_raise_if_exists(movie_create)
+
+    # create second time, raises
+    with pytest.raises(
+        MovieAlreadyExists,
+        match=movie_create.slug,
+    ) as exc_info:
+        storage.create_or_raise_if_exists(movie_create)
+    assert exc_info.value.args == (movie_create.slug,)
