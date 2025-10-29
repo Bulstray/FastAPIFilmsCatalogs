@@ -1,21 +1,19 @@
 # FastAPI Films Catalog
 
-![Python](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+## 🛠 Quality Assurance
 
-## CI/CD Status
+| Tool | Status | Purpose |
+|------|--------|---------|
+| **Black** | ![Black](https://img.shields.io/badge/◼️_Black-Formatted-000000?style=flat-square) | Code formatting |
+| **Ruff** | ![Ruff](https://img.shields.io/badge/🪶_Ruff-Linting-FCC21B?style=flat-square&logoColor=black) | Code linting |
+| **MyPy** | ![MyPy](https://img.shields.io/badge/🧪_MyPy-Typing-0075C9?style=flat-square) | Type checking |
+| **Pytest** | ![Pytest](https://img.shields.io/badge/🧪_Pytest-Testing-0A9EDC?style=flat-square) | Test execution |
+| **Coverage** | ![Coverage](https://img.shields.io/badge/📊_Coverage-Reports-F01F7A?style=flat-square) | Code coverage |
 
-[![Black](https://img.shields.io/badge/Black-◼️_Code_Format-000000?style=for-the-badge&logo=python&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Ruff](https://img.shields.io/badge/Ruff-🪶_Linting-FCC21B?style=for-the-badge&logo=python&logoColor=black)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![MyPy](https://img.shields.io/badge/MyPy-🧪_Type_Checking-0075C9?style=for-the-badge&logo=python&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Pytest](https://img.shields.io/badge/Pytest-🧪_Testing-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Coverage](https://img.shields.io/badge/Codecov-📊_Coverage-F01F7A?style=for-the-badge&logo=codecov&logoColor=white)](https://codecov.io/gh/Bulstray/FastAPIFilmsCatalogs)
+## 📊 CI/CD Status
 
-## Workflow Badges
-
-![Python Checks](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg?style=for-the-badge)
-![Tests](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg?event=pull_request&style=for-the-badge)
+[![Python Checks](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
+[![Codecov](https://codecov.io/gh/Bulstray/FastAPIFilmsCatalogs/branch/master/graph/badge.svg)](https://codecov.io/gh/Bulstray/FastAPIFilmsCatalogs)
 ## Develop
 
 Check GitHub Actions after any push.
