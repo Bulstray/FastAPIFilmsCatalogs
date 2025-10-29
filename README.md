@@ -1,19 +1,21 @@
 # FastAPI Films Catalog
 
-## 🛠 Quality Assurance
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat-square&logo=fastapi)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
 
-| Tool | Status | Purpose |
-|------|--------|---------|
-| **Black** | ![Black](https://img.shields.io/badge/◼️_Black-Formatted-000000?style=flat-square) | Code formatting |
-| **Ruff** | ![Ruff](https://img.shields.io/badge/🪶_Ruff-Linting-FCC21B?style=flat-square&logoColor=black) | Code linting |
-| **MyPy** | ![MyPy](https://img.shields.io/badge/🧪_MyPy-Typing-0075C9?style=flat-square) | Type checking |
-| **Pytest** | ![Pytest](https://img.shields.io/badge/🧪_Pytest-Testing-0A9EDC?style=flat-square) | Test execution |
-| **Coverage** | ![Coverage](https://img.shields.io/badge/📊_Coverage-Reports-F01F7A?style=flat-square) | Code coverage |
+## CI/CD Status
 
-## 📊 CI/CD Status
+[![Black](https://img.shields.io/badge/Black-◼️_Format-000000?style=flat-square&logo=python&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
+[![Ruff](https://img.shields.io/badge/Ruff-🪶_Lint-FCC21B?style=flat-square&logo=python&logoColor=black)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
+[![MyPy](https://img.shields.io/badge/MyPy-🧪_Types-0075C9?style=flat-square&logo=python&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
+[![Pytest](https://img.shields.io/badge/Pytest-🧪_Tests-0A9EDC?style=flat-square&logo=pytest&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
+[![Coverage](https://img.shields.io/badge/Codecov-📊_Coverage-F01F7A?style=flat-square&logo=codecov&logoColor=white)](https://codecov.io/gh/Bulstray/FastAPIFilmsCatalogs)
 
-[![Python Checks](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Codecov](https://codecov.io/gh/Bulstray/FastAPIFilmsCatalogs/branch/master/graph/badge.svg)](https://codecov.io/gh/Bulstray/FastAPIFilmsCatalogs)
+## Workflow Status
+
+[![Python Checks](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg?style=flat-square)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
+[![Tests](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg?event=pull_request&style=flat-square)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
 ## Develop
 
 Check GitHub Actions after any push.
