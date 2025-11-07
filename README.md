@@ -7,7 +7,7 @@
 [![Type Checking: mypy](https://img.shields.io/badge/type%20checking-mypy-blueviolet?logo=python&style=for-the-badge)](https://github.com/python/mypy)
 [![Dependency: uv](https://img.shields.io/badge/dependencies-uv-4B8BBE?logo=python&style=for-the-badge)](https://github.com/astral-sh/uv)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-22C55E?style=for-the-badge&logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-[![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fbulstray%2ad8288ac28a410072f6d112f470bf61%2Fraw%2Fcoverage.json&style=for-the-badge)](https://github.com/bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yaml)
+[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bulstray/2ad8288ac28a410072f6d112f470bf61/raw/coverage.json&style=for-the-badge)](./.github/workflows/python-checks.yaml)
 
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/bulstray/FastAPIFilmsCatalogs/master.svg)](https://results.pre-commit.ci/latest/github/bulstray/FastAPIFilmsCatalogs/master)
 [![Codecov](https://codecov.io/gh/bulstray/FastAPIFilmsCatalogs/branch/master/graph/badge.svg)](https://codecov.io/gh/bulstray/FastAPIFilmsCatalogs)
