@@ -1,23 +1,16 @@
-# FastAPI Films Catalog
-
 # 🎬 FastAPI Films Catalog
 
-![Python](https://img.shields.io/badge/Python-3.13+-3776AB?style=flat-square&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat-square&logo=fastapi)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
+[![Python checks 🐍](https://img.shields.io/github/actions/workflow/status/bulstray/FastAPIFilmsCatalogs/python-checks.yaml?branch=master&label=Python%20checks%20%F0%9F%90%8D&logo=github&style=for-the-badge)](https://github.com/bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yaml)
+[![Python Version](https://img.shields.io/badge/python-3.13%2B-blue?logo=python&style=for-the-badge)](https://www.python.org/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?logo=python&style=for-the-badge)](https://github.com/psf/black)
+[![Lint: Ruff](https://img.shields.io/badge/lint-ruff-%23efc000?logo=ruff&logoColor=white&style=for-the-badge)](https://github.com/astral-sh/ruff)
+[![Type Checking: mypy](https://img.shields.io/badge/type%20checking-mypy-blueviolet?logo=python&style=for-the-badge)](https://github.com/python/mypy)
+[![Dependency: uv](https://img.shields.io/badge/dependencies-uv-4B8BBE?logo=python&style=for-the-badge)](https://github.com/astral-sh/uv)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-22C55E?style=for-the-badge&logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fbulstray%2ad8288ac28a410072f6d112f470bf61%2Fraw%2Fcoverage.json&style=for-the-badge)](https://github.com/bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yaml)
 
-## CI/CD Status
-
-[![Black](https://img.shields.io/badge/Black-◼️_Format-000000?style=flat-square&logo=python&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Ruff](https://img.shields.io/badge/Ruff-🪶_Lint-FCC21B?style=flat-square&logo=python&logoColor=black)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![MyPy](https://img.shields.io/badge/MyPy-🧪_Types-0075C9?style=flat-square&logo=python&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Pytest](https://img.shields.io/badge/Pytest-🧪_Tests-0A9EDC?style=flat-square&logo=pytest&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Coverage](https://img.shields.io/badge/Coverage-📊_Tests-43B02A?style=flat-square&logo=codecov&logoColor=white)](./.github/workflows/python-checks.yaml)
-
-## Workflow Status
-
-[![Python Checks](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml)
-[![Tests](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-tests.yml/badge.svg)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-tests.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/bulstray/FastAPIFilmsCatalogs/master.svg)](https://results.pre-commit.ci/latest/github/bulstray/FastAPIFilmsCatalogs/master)
+[![Codecov](https://codecov.io/gh/bulstray/FastAPIFilmsCatalogs/branch/master/graph/badge.svg)](https://codecov.io/gh/bulstray/FastAPIFilmsCatalogs)
 
 ## Develop
 
