@@ -179,3 +179,4 @@ cython_debug/
 films-catalog/config.local.yaml
 
 .secrets
+coverage.json
