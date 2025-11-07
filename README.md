@@ -16,10 +16,9 @@
 
 ## Workflow Status
 
-[![Python Checks](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg?style=flat-square)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Tests](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg?event=pull_request&style=flat-square)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
+[![Python Checks](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml)
+[![Tests](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-tests.yml/badge.svg)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-tests.yml)
 
-## Develop
 ## Develop
 
 Check GitHub Actions after any push.
