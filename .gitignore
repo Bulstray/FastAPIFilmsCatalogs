@@ -177,5 +177,3 @@ cython_debug/
 .pypirc
 
 films-catalog/config.local.yaml
-
-.secrets
