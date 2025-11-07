@@ -10,7 +10,7 @@
 [![Ruff](https://img.shields.io/badge/Ruff-🪶_Lint-FCC21B?style=flat-square&logo=python&logoColor=black)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
 [![MyPy](https://img.shields.io/badge/MyPy-🧪_Types-0075C9?style=flat-square&logo=python&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
 [![Pytest](https://img.shields.io/badge/Pytest-🧪_Tests-0A9EDC?style=flat-square&logo=pytest&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Coverage](https://img.shields.io/badge/Codecov-📊_Coverage-F01F7A?style=flat-square&logo=codecov&logoColor=white)](https://codecov.io/gh/Bulstray/FastAPIFilmsCatalogs)
+[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bulstray/2ad8288ac28a410072f6d112f470bf61/raw/coverage.json&style=for-the-badge)](./.github/workflows/python-checks.yaml)
 
 ## Workflow Status
 
