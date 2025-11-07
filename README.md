@@ -1,6 +1,8 @@
 # FastAPI Films Catalog
 
-![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=flat-square&logo=python&logoColor=white)
+# 🎬 FastAPI Films Catalog
+
+![Python](https://img.shields.io/badge/Python-3.13+-3776AB?style=flat-square&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat-square&logo=fastapi)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
 
@@ -10,12 +12,14 @@
 [![Ruff](https://img.shields.io/badge/Ruff-🪶_Lint-FCC21B?style=flat-square&logo=python&logoColor=black)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
 [![MyPy](https://img.shields.io/badge/MyPy-🧪_Types-0075C9?style=flat-square&logo=python&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
 [![Pytest](https://img.shields.io/badge/Pytest-🧪_Tests-0A9EDC?style=flat-square&logo=pytest&logoColor=white)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
-[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bulstray/2ad8288ac28a410072f6d112f470bf61/raw/coverage.json&style=for-the-badge)](./.github/workflows/python-checks.yaml)
+[![Coverage](https://img.shields.io/badge/Coverage-📊_Tests-43B02A?style=flat-square&logo=codecov&logoColor=white)](./.github/workflows/python-checks.yaml)
 
 ## Workflow Status
 
 [![Python Checks](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg?style=flat-square)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
 [![Tests](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions/workflows/python-checks.yml/badge.svg?event=pull_request&style=flat-square)](https://github.com/Bulstray/FastAPIFilmsCatalogs/actions)
+
+## Develop
 ## Develop
 
 Check GitHub Actions after any push.
